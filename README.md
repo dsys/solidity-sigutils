@@ -3,7 +3,7 @@
 ![Travis](https://img.shields.io/travis/cleargraphinc/solidity-sigutils.svg) 
 ![npm](https://img.shields.io/npm/v/solidity-sigutils.svg)
 
-A solidity library for verifying message multi-signatures.
+A solidity library for verifying Ethereum message multi-signatures.
 
 These utilities make it simple to interact with Ethereum signed messages based on [EIP 191](https://github.com/ethereum/EIPs/issues/191). They are especially useful for multi-sig self-sovereign identity contracts based on [ERC 1077](https://github.com/ethereum/EIPs/pull/1077). They are a building block for Cleargraph's open and decentralized identity system, and can be used for many other purposes in decentralized applications.
 
@@ -40,6 +40,8 @@ contract MyContract {
 
 }
 ```
+
+[Check out the tests for more examples.](https://github.com/cleargraphinc/solidity-sigutils/blob/master/test/TestSignatureUtils.sol)
 
 ## Working with Ethereum Signed Messages
 
