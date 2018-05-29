@@ -76,9 +76,9 @@ PRs welcome. To install dependencies and start the local development server:
     $ make install-mythril
     $ make myth
 
-## License
+## Coda
 
-Apache 2.0
+Licensed under Apache 2.0. Started at [ETHBuenosAires](https://ethbuenosaires.com/).
 
 # API Reference
 * [SignatureUtils](#signatureutils)
