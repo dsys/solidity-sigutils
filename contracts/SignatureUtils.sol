@@ -1,5 +1,7 @@
 pragma solidity ^0.4.23;
 
+/// @title A library of utilities for (multi)signatures
+/// @author Alexander Kern <alex@cleargraph.com>
 library SignatureUtils {
 
     function toEthBytes32SignedMessageHash(
