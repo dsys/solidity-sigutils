@@ -2,7 +2,7 @@
 
 set -e
 
-yarn start &
+ganache-cli --gasLimit 10000000 --port 9545 &
 sleep 5 # to make sure ganache-cli is up and running before compiling
 rm -rf build
 yarn compile
