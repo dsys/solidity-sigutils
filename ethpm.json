@@ -1,0 +1,15 @@
+{
+  "package_name": "sigutils",
+  "version": "1.0.0",
+  "description": "A solidity library for verifying message multi-signatures",
+  "authors": [
+    "Alexander Kern <alex@cleargraph.com>"
+  ],
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "security",
+    "signatures"
+  ],
+  "license": "Apache-2.0"
+}
