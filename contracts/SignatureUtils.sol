@@ -2,8 +2,11 @@ pragma solidity ^0.4.23;
 
 /// @title A library of utilities for (multi)signatures
 /// @author Alexander Kern <alex@cleargraph.com>
+/// @dev This library can be linked to another Solidity contract to expose signature manipulation functions.
 library SignatureUtils {
 
+    /// @notice Converts a bytes32 to an signed message hash.
+    /// @param _msg The bytes32 message (i.e. keccak256 result) to encrypt
     function toEthBytes32SignedMessageHash(
         bytes32 _msg
     )
@@ -14,6 +17,8 @@ library SignatureUtils {
         signHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", _msg));
     }
 
+    /// @notice Converts a byte array to an personal signed message hash (`web3.personal.sign(...)`) by concatenating its length.
+    /// @param _msg The bytes array to encrypt
     function toEthPersonalSignedMessageHash(
         bytes _msg
     )
@@ -24,6 +29,8 @@ library SignatureUtils {
         signHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n", uintToString(_msg.length), _msg));
     }
 
+    /// @notice Converts a uint to its decimal string representation.
+    /// @param v The uint to convert
     function uintToString(
         uint v
     )
@@ -60,6 +67,10 @@ library SignatureUtils {
         return string(resultBytes);
     }
 
+    /// @notice Extracts the r, s, and v parameters to `ecrecover(...)` from the signature at position _pos in a densely packed signatures bytes array.
+    /// @param _signatures The signatures bytes array
+    /// @param _pos The position of the signature in the bytes array (0 indexed)
+    /// @dev Based on [OpenZeppelin's ECRecovery](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/ECRecovery.sol)
     function parseSignature(
         bytes _signatures,
         uint _pos
@@ -86,6 +97,9 @@ library SignatureUtils {
         require(v == 27 || v == 28);
     }
 
+    /// @notice Counts the number of signatures in a signatures bytes array. Returns 0 if the length is invalid.
+    /// @param _signatures The signatures bytes array
+    /// @dev Signatures are 65 bytes long and are densely packed.
     function countSignatures(
         bytes _signatures
     )
@@ -96,6 +110,10 @@ library SignatureUtils {
         return _signatures.length % 65 == 0 ? _signatures.length / 65 : 0;
     }
 
+    /// @notice Recovers an address using a message hash and a signature in a bytes array.
+    /// @param _hash The signed message hash
+    /// @param _signatures The signatures bytes array
+    /// @param _pos The signature's position in the bytes array (0 indexed)
     function recoverAddress(
         bytes32 _hash,
         bytes _signatures,
@@ -112,6 +130,9 @@ library SignatureUtils {
         return ecrecover(_hash, v, r, s);
     }
 
+    /// @notice Recovers a list of addresses using a message hash and a signatures bytes array.
+    /// @param _hash The signed message hash
+    /// @param _signatures The signatures bytes array
     function recoverAddresses(
         bytes32 _hash,
         bytes _signatures
