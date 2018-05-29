@@ -1,24 +1,16 @@
-dist: xenial
+dist: trusty
 sudo: required
+group: beta
 language: node_js
 node_js:
-  - "9.4.0"
-
-matrix:
-  include:
-    - os: linux
-      dist: xenial
-      before_install:
-      - sudo add-apt-repository ppa:ethereum/ethereum -y
-      - sudo apt-get update
-      - sudo apt-get install build-essential -y
-      - sudo apt-get install gcc g++ libssl-dev libudev-dev pkg-config
-      - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-      - sudo apt-get install -y nodejs
-      - rm -rf node_modules
-
-install:
-  - npm install
-
+  - "8"
+cache:
+  directories:
+    - node_modules
+env:
+  - SOLIDITY_COVERAGE=true
+  - SOLC_NIGHTLY=true
+before_script:
+  - truffle version
 script:
   - bash ./bin/test.sh
