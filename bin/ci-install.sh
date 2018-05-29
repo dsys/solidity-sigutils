@@ -1,2 +1,2 @@
 #!/bin/bash
-yarn add -g ganache-cli truffle
+npm install -g ganache-cli
