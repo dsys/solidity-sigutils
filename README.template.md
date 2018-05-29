@@ -1,11 +1,11 @@
 # solidity-sigutils
 
-![Travis](https://img.shields.io/travis/cleargraphinc/solidity-sigutils.svg) 
+![Travis](https://img.shields.io/travis/dsys/solidity-sigutils.svg) 
 ![npm](https://img.shields.io/npm/v/solidity-sigutils.svg)
 
 A solidity library for verifying Ethereum message multi-signatures.
 
-These utilities make it simple to interact with Ethereum signed messages based on [EIP 191](https://github.com/ethereum/EIPs/issues/191). They are especially useful for multi-sig self-sovereign identity contracts based on [ERC 1077](https://github.com/ethereum/EIPs/pull/1077). They are a building block for Cleargraph's open and decentralized identity system, and can be used for many other purposes in decentralized applications.
+These utilities make it simple to interact with Ethereum signed messages based on [EIP 191](https://github.com/ethereum/EIPs/issues/191). They are especially useful for multi-signature identity contracts based on [ERC 1077](https://github.com/ethereum/EIPs/pull/1077). They are a building block for Cleargraph's open and decentralized identity system, and can be used for many other purposes in decentralized applications.
 
 You can sign a transaction/message using your private key by calling [web3.personal.sign()](https://web3js.readthedocs.io/en/1.0/web3-eth-personal.html) using MetaMask, Toshi, or another compatible web3 runtime. All signatures are 65 bytes long with the format `{bytes32 r}{bytes32 s}{uint8 v}`. Multiple signatures are stored densely (no padding) by concatenating them.
 
@@ -41,19 +41,20 @@ contract MyContract {
 }
 ```
 
-[Check out the tests for more examples.](https://github.com/cleargraphinc/solidity-sigutils/blob/master/test/TestSignatureUtils.sol)
+[Check out the tests for more examples.](https://github.com/dsys/solidity-sigutils/blob/master/test/TestSignatureUtils.sol)
 
 ## Working with Ethereum Signed Messages
 
-Signed messages are becoming an increasingly important part of decentralized applications, especially for identity management. Imagine a user wishes to perform a transaction on the Ethereum chain, but does not posses ether and therefore cannot pay for gas costs. One emerging solution is to use signed messages, a proxy contract, and a gas relay service. Here's how it goes:
+![solidity-sigutils flow](https://raw.githubusercontent.com/dsys/solidity-sigutils/master/resources/diagram.png)
 
-1. A user wishes to perform a transaction and signs a message with the transaction details using their private key.
-2. The user sends the transaction details and signature to a relay service off-chain.
-3. The relay verifies the message and executes it on the proxy contract, paying for gas costs.
-4. The proxy contract verifies the transaction details and signature, reverting if invalid.
-5. The proxy contract performs the transaction.
+Signed messages are becoming an increasingly important part of decentralized applications, especially for identity management. Imagine a user wishes to perform a transaction (i.e. send a cryptokitty to a friend) on the Ethereum chain, but wants to require approval from two of their devices approve. One emerging solution is to use signed messages and a proxy contract. Here's how it goes:
 
-Because signed messages inherit the security of Ethereum's `ecrecover()`, a user does not need to trust a gas relay with their private key to perform actions on their behalf. Many relay implementations require that a signature be signed with a private key on an address whitelist. Additionally, self-sovereign identity contracts may require multiple signatures for the same message to be valid.
+1. The user signs a transaction message with their private key from multiple devices.
+2. The user concatenates the message signatures into a single multi-signature.
+3. The user sends the transaction message and concatenated signatures to their proxy verifier contract, which verifies that enough valid signatures have been provided using this library.
+4. The proxy contract forwards the transaction to the designated contract.
+
+Because signed messages inherit the security of Ethereum's `ecrecover()`, a user does not need to trust intermediaries with their private key to perform actions on their behalf. This enables more complex deployment strategies, such as gas relays which pay for gas costs on a user's behalf.
 
 ## Development
 
