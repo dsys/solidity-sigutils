@@ -86,7 +86,7 @@ contract TestSignatureUtils {
         Assert.equal(count, 1, "Signature count should be zero");
 
         count = SignatureUtils.countSignatures(
-            hex"bdaf2b3265225e00f4df2a3a038bea2907c5f0194311a9449735e477971d54c844fe7bf6590dc048cd005ed6c070ca8eeda91a0636328136b5f36c656be733451ca3bee0d556bf8faa9923d33649b8dc601779c9b8f5bd0e18b243a56a696eacbd0740091f1321e33f929758645fd0bdbeea76017defc6e7742ffcefc73055ea991c"
+        hex"bdaf2b3265225e00f4df2a3a038bea2907c5f0194311a9449735e477971d54c844fe7bf6590dc048cd005ed6c070ca8eeda91a0636328136b5f36c656be733451ca3bee0d556bf8faa9923d33649b8dc601779c9b8f5bd0e18b243a56a696eacbd0740091f1321e33f929758645fd0bdbeea76017defc6e7742ffcefc73055ea991c"
         );
         Assert.equal(count, 2, "Signature count should be correct");
     }

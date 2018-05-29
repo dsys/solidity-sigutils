@@ -3,7 +3,7 @@ pragma solidity ^0.4.23;
 library SignatureUtils {
 
     function toEthBytes32SignedMessageHash(
-      bytes32 _msg
+        bytes32 _msg
     )
         pure
         public
@@ -13,7 +13,7 @@ library SignatureUtils {
     }
 
     function toEthPersonalSignedMessageHash(
-      bytes _msg
+        bytes _msg
     )
         pure
         public
@@ -29,38 +29,38 @@ library SignatureUtils {
         public
         returns (string)
     {
+        uint w = v;
         bytes32 x;
         if (v == 0) {
-          x = '0';
-        }
-        else {
-          while (v > 0) {
-            x = bytes32(uint(x) / (2 ** 8));
-            x |= bytes32(((v % 10) + 48) * 2 ** (8 * 31));
-            v /= 10;
-          }
+            x = "0";
+        } else {
+            while (w > 0) {
+                x = bytes32(uint(x) / (2 ** 8));
+                x |= bytes32(((w % 10) + 48) * 2 ** (8 * 31));
+                w /= 10;
+            }
         }
 
         bytes memory bytesString = new bytes(32);
         uint charCount = 0;
         for (uint j = 0; j < 32; j++) {
-          byte char = byte(bytes32(uint(x) * 2 ** (8 * j)));
-          if (char != 0) {
-            bytesString[charCount] = char;
-            charCount++;
-          }
+            byte char = byte(bytes32(uint(x) * 2 ** (8 * j)));
+            if (char != 0) {
+                bytesString[charCount] = char;
+                charCount++;
+            }
         }
         bytes memory resultBytes = new bytes(charCount);
         for (j = 0; j < charCount; j++) {
-          resultBytes[j] = bytesString[j];
+            resultBytes[j] = bytesString[j];
         }
 
         return string(resultBytes);
     }
 
     function parseSignature(
-      bytes _signatures,
-      uint _pos
+        bytes _signatures,
+        uint _pos
     )
         pure
         public
@@ -70,7 +70,7 @@ library SignatureUtils {
         // The signature format is a compact form of:
         //   {bytes32 r}{bytes32 s}{uint8 v}
         // Compact means, uint8 is not padded to 32 bytes.
-        assembly {
+        assembly { // solium-disable-line security/no-inline-assembly
             r := mload(add(_signatures, add(32, offset)))
             s := mload(add(_signatures, add(64, offset)))
             // Here we are loading the last 32 bytes, including 31 bytes
@@ -93,11 +93,11 @@ library SignatureUtils {
         public
         returns (address)
     {
-      uint8 v;
-      bytes32 r;
-      bytes32 s;
-      (v, r, s) = parseSignature(_signatures, _pos);
-      return ecrecover(_hash, v, r, s);
+        uint8 v;
+        bytes32 r;
+        bytes32 s;
+        (v, r, s) = parseSignature(_signatures, _pos);
+        return ecrecover(_hash, v, r, s);
     }
 
     function countSignatures(
