@@ -1,5 +1,8 @@
 # solidity-sigutils
 
+![Travis](https://img.shields.io/travis/cleargraphinc/solidity-sigutils.svg) 
+![npm](https://img.shields.io/npm/v/solidity-sigutils.svg)
+
 Solidity library for (multi)signatures.
 
 ## Usage
