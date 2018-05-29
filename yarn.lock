@@ -1308,6 +1308,10 @@ domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
 
+dot@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/dot/-/dot-1.1.2.tgz#c7377019fc4e550798928b2b9afeb66abfa1f2f9"
+
 drbg.js@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/drbg.js/-/drbg.js-1.0.1.tgz#3e36b6c42b37043823cdbc332d58f31e2445480b"
@@ -2350,7 +2354,7 @@ keccak@^1.0.2:
     nan "^2.2.1"
     safe-buffer "^5.1.0"
 
-keccakjs@^0.2.0:
+keccakjs@^0.2.0, keccakjs@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/keccakjs/-/keccakjs-0.2.1.tgz#1d633af907ef305bbf9f2fa616d56c44561dfa4d"
   dependencies:
@@ -3690,7 +3694,7 @@ sol-explore@1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/sol-explore/-/sol-explore-1.6.1.tgz#b59f073c69fe332560d5a10c32ba8ca7f2986cfb"
 
-solc@0.4.24, solc@^0.4.2:
+solc@0.4.24, solc@^0.4.2, solc@^0.4.23:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/solc/-/solc-0.4.24.tgz#354f14b269b38cbaa82a47d1ff151723502b954e"
   dependencies:
@@ -3735,6 +3739,15 @@ solium@^1.1.7:
     solium-plugin-security "0.1.1"
     solparse "2.2.5"
     text-table "^0.2.0"
+
+solmd@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/solmd/-/solmd-0.3.0.tgz#2b0d72bd587573993b3041e771f5396b4d74fa58"
+  dependencies:
+    dot "^1.1.2"
+    keccakjs "^0.2.1"
+    minimist "^1.2.0"
+    solc "^0.4.23"
 
 solparse@2.2.5:
   version "2.2.5"

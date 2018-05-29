@@ -7,6 +7,10 @@ Solidity library for (multi)signatures.
 
 ## Usage
 
+[API Reference](https://github.com/cleargraphinc/solidity-sigutils/blob/master/API.md)
+
+Install using npm:
+
     $ npm install --save solidity-sigutils
 
 Then, in your solidity file, use the library:

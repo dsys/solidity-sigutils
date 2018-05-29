@@ -1,5 +1,5 @@
 {
-  "name": "solidity-signatureutils",
+  "name": "solidity-sigutils",
   "version": "1.0.0",
   "description": "Solidity library for (multi)signatures",
   "main": "index.js",
@@ -15,12 +15,14 @@
     "migrate-rinkeby": "truffle migrate --reset --compile-all --network rinkeby",
     "migrate-mainnet": "truffle migrate --compile-all --network mainnet",
     "lint": "solium -d contracts/",
-    "fix": "solium --fix -d contracts/"
+    "fix": "solium --fix -d contracts/",
+    "gen-docs": "solmd contracts/SignatureUtils.sol --dest API.md"
   },
   "devDependencies": {
     "eth-gas-reporter": "^0.1.2",
     "solidity-docgen": "^0.1.0",
     "solium": "^1.1.7",
+    "solmd": "^0.3.0",
     "truffle": "^4.1.11",
     "truffle-privatekey-provider": "^0.0.6"
   }
