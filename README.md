@@ -5,7 +5,7 @@
 
 A solidity library for verifying Ethereum message multi-signatures.
 
-These utilities make it simple to interact with Ethereum signed messages based on [EIP 191](https://github.com/ethereum/EIPs/issues/191). They are especially useful for multi-signature identity contracts based on [ERC 1077](https://github.com/ethereum/EIPs/pull/1077). They are a building block for Cleargraph's open and decentralized identity system, and can be used for many other purposes in decentralized applications.
+These utilities make it simple to interact with Ethereum signed messages based on [EIP 191](https://github.com/ethereum/EIPs/issues/191) and [ERC 1077](https://github.com/ethereum/EIPs/pull/1077). They are a building block for Cleargraph's open and decentralized identity system, and can be used for many other purposes in decentralized applications.
 
 You can sign a transaction/message using your private key by calling [web3.personal.sign()](https://web3js.readthedocs.io/en/1.0/web3-eth-personal.html) using MetaMask, Toshi, or another compatible web3 runtime. All signatures are 65 bytes long with the format `{bytes32 r}{bytes32 s}{uint8 v}`. Multiple signatures are stored densely (no padding) by concatenating them.
 
@@ -15,14 +15,18 @@ You can sign a transaction/message using your private key by calling [web3.perso
 
 [![solidity-sigutils flow](https://raw.githubusercontent.com/dsys/solidity-sigutils/master/resources/diagram.png)](#working-with-ethereum-signed-messages)
 
-Signed messages are becoming an increasingly important part of decentralized applications, especially for identity management. Imagine a user wishes to perform a transaction (i.e. send a cryptokitty to a friend) on the Ethereum chain, but wants to require approval from two of their devices approve. One emerging solution is to use signed messages and a proxy contract. Here's how it goes:
+[Signed messages](https://medium.com/@angellopozo/ethereum-signing-and-validating-13a2d7cb0ee3) are an increasingly important tool used by decentralized applications. They enable complex access management and delegation patterns and have greater flexibility than raw transactions. Wallet applications such as MetaMask and Toshi support signing transactions via their web3 provider which contracts can verify using `ecrecover()`.
 
-1. The user signs a transaction message with their private key from multiple devices.
-2. The user concatenates the message signatures into a single multi-signature.
-3. The user sends the transaction message and concatenated signatures to their proxy verifier contract, which verifies that enough valid signatures have been provided using this library.
-4. The proxy contract forwards the transaction to the designated contract.
+In the context of identity management, signed messages play a crucial role in building more secure and accessible wallets. Conventionally, anyone with a user's private key has full control over their wallet. This is a security vulnerability: *any malicious actor with access to the user's private key can steal all funds.*
 
-Because signed messages inherit the security of Ethereum's `ecrecover()`, a user does not need to trust intermediaries with their private key to perform actions on their behalf. This enables more complex deployment strategies, such as gas relays which pay for gas costs on a user's behalf.
+To improve security, it makes sense to require multi-factor approval from more than one device for some or all transactions. A so-called "multisig identity" often involves a proxy contract that accepts signed transactions from a whitelist of keys. To perform a multisig transaction:
+
+1. **Sign:** The user signs a transaction message with their private key from multiple devices.
+2. **Concatenate:** The user concatenates the message signatures into a single multi-signature.
+3. **Verify:** The user sends the transaction message and concatenated signatures to their proxy verifier contract, which verifies that enough valid signatures have been provided using *solidity-sigutils*.
+4. **Execute:** The proxy contract forwards the transaction to the designated contract.
+
+Signed messages inherit the security of Ethereum's `web3.personal.sign()` and `ecrecover()`. One important benefit over raw transactions is that users can work with trust-less intermediaries without sharing their private keys. For example, signed messages enable complex transaction funding strategies like gas relays which pay for transaction costs on a user's behalf. Additionally, identity contracts may choose to use signed messages to implement advanced functionalities such as account recovery logic that does not rely on centralized authorities.
 
 ## Installation
 
