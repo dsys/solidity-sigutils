@@ -16,7 +16,7 @@
     "migrate-mainnet": "truffle migrate --compile-all --network mainnet",
     "lint": "solium -d contracts/",
     "fix": "solium --fix -d contracts/",
-    "gen-docs": "solmd contracts/SignatureUtils.sol --dest API.md"
+    "gen-docs": "solmd contracts/SignatureUtils.sol --dest API.md && cat README.template.md API.md > README.md"
   },
   "devDependencies": {
     "eth-gas-reporter": "^0.1.2",
