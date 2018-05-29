@@ -59,18 +59,18 @@ Because signed messages inherit the security of Ethereum's `ecrecover()`, a user
 
 PRs welcome. To install dependencies and start the local development server:
 
-    $ yarn install
-    $ yarn run migrate
-    $ yarn start
+    $ npm install
+    $ npm run migrate
+    $ npm start
 
 ### Testing
 
-    $ yarn test
-    $ yarn run watch # requires watchman: brew install watchman
+    $ npm test
+    $ npm run watch # requires watchman: brew install watchman
 
 ### Regenerate documentation
 
-    $ yarn run gen-docs
+    $ npm run gen-docs
 
 ### Static analysis with Mythril
 
