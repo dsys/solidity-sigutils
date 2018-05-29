@@ -2,7 +2,7 @@
 
 set -e
 
-ganache-cli --gasLimit 10000000 --port 9545 &
+ganache-cli --port 9545 > /dev/null &
 sleep 5 # to make sure ganache-cli is up and running before compiling
 rm -rf build
 yarn migrate
