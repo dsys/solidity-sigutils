@@ -84,6 +84,16 @@ library SignatureUtils {
         require(v == 27 || v == 28);
     }
 
+    function countSignatures(
+        bytes _signatures
+    )
+        pure
+        public
+        returns (uint)
+    {
+        return _signatures.length % 65 == 0 ? _signatures.length / 65 : 0;
+    }
+
     function recoverAddress(
         bytes32 _hash,
         bytes _signatures,
@@ -100,16 +110,6 @@ library SignatureUtils {
         return ecrecover(_hash, v, r, s);
     }
 
-    function countSignatures(
-        bytes _signatures
-    )
-        pure
-        public
-        returns (uint)
-    {
-        return _signatures.length % 65 == 0 ? _signatures.length / 65 : 0;
-    }
-
     function recoverAddresses(
         bytes32 _hash,
         bytes _signatures
@@ -118,10 +118,14 @@ library SignatureUtils {
         public
         returns (address[] addresses)
     {
+        uint8 v;
+        bytes32 r;
+        bytes32 s;
         uint count = countSignatures(_signatures);
         addresses = new address[](count);
         for (uint i = 0; i < count; i++) {
-            addresses[i] = recoverAddress(_hash, _signatures, i);
+            (v, r, s) = parseSignature(_signatures, i);
+            addresses[i] = ecrecover(_hash, v, r, s);
         }
     }
 

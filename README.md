@@ -6,7 +6,7 @@ Solidity library for (multi)signatures.
 
     $ npm install --save solidity-sigutils
 
-Then, in your solidity file:
+Then, in your solidity file, use the library:
 
 ```solidity
 import "solidity-sigutils/contracts/SignatureUtils.sol";
@@ -14,11 +14,11 @@ import "solidity-sigutils/contracts/SignatureUtils.sol";
 contract MyContract {
 
     function myFunction(
-        string _msg,
+        string _personalMessage,
         bytes _signatures
     ) public returns (address[]) {
-        bytes32 hash = SignatureUtils.toEthPersonalSignedMessageHash(_msg);
-        return SignatureUtils.recoverAddresses(_msg, _signatures);
+        bytes32 hash = SignatureUtils.toEthPersonalSignedMessageHash(_personalMessage);
+        return SignatureUtils.recoverAddresses(hash, _signatures);
     }
 
 }
