@@ -17,7 +17,7 @@ library SignatureUtils {
         signHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", _msg));
     }
 
-    /// @notice Converts a byte array to an personal signed message hash (`web3.personal.sign(...)`) by concatenating its length.
+    /// @notice Converts a byte array to a personal signed message hash (result of `web3.personal.sign(...)`) by concatenating its length.
     /// @param _msg The bytes array to encrypt
     function toEthPersonalSignedMessageHash(
         bytes _msg
@@ -67,10 +67,10 @@ library SignatureUtils {
         return string(resultBytes);
     }
 
-    /// @notice Extracts the r, s, and v parameters to `ecrecover(...)` from the signature at position _pos in a densely packed signatures bytes array.
+    /// @notice Extracts the r, s, and v parameters to `ecrecover(...)` from the signature at position `_pos` in a densely packed signatures bytes array.
+    /// @dev Based on [OpenZeppelin's ECRecovery](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/ECRecovery.sol)
     /// @param _signatures The signatures bytes array
     /// @param _pos The position of the signature in the bytes array (0 indexed)
-    /// @dev Based on [OpenZeppelin's ECRecovery](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/ECRecovery.sol)
     function parseSignature(
         bytes _signatures,
         uint _pos
@@ -130,7 +130,7 @@ library SignatureUtils {
         return ecrecover(_hash, v, r, s);
     }
 
-    /// @notice Recovers a list of addresses using a message hash and a signatures bytes array.
+    /// @notice Recovers an array of addresses using a message hash and a signatures bytes array.
     /// @param _hash The signed message hash
     /// @param _signatures The signatures bytes array
     function recoverAddresses(

@@ -46,7 +46,7 @@ Inputs
 
 SignatureUtils.parseSignature(_signatures, _pos) `pure` `b31d63cc`
 
-**Extracts the r, s, and v parameters to `ecrecover(...)` from the signature at position _pos in a densely packed signatures bytes array.**
+**Extracts the r, s, and v parameters to `ecrecover(...)` from the signature at position `_pos` in a densely packed signatures bytes array.**
 
 > Based on [OpenZeppelin's ECRecovery](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/ECRecovery.sol)
 
@@ -62,7 +62,7 @@ Inputs
 
 SignatureUtils.toEthPersonalSignedMessageHash(_msg) `pure` `d8a40f6b`
 
-**Converts a byte array to an personal signed message hash (`web3.personal.sign(...)`) by concatenating its length.**
+**Converts a byte array to a personal signed message hash (result of `web3.personal.sign(...)`) by concatenating its length.**
 
 
 Inputs
@@ -104,7 +104,7 @@ Inputs
 
 SignatureUtils.recoverAddresses(_hash, _signatures) `pure` `f0c8e969`
 
-**Recovers a list of addresses using a message hash and a signatures bytes array.**
+**Recovers an array of addresses using a message hash and a signatures bytes array.**
 
 
 Inputs
