@@ -8,8 +8,14 @@ cache:
   directories:
     - node_modules
 env:
-  - SOLIDITY_COVERAGE=true
+  -
   - SOLC_NIGHTLY=true
+  # - SOLIDITY_COVERAGE=true
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: SOLC_NIGHTLY=true
+    # - env: SOLIDITY_COVERAGE=true
 before_script:
   - truffle version
 script:
