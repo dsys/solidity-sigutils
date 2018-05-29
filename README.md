@@ -9,9 +9,22 @@ These utilities make it simple to interact with Ethereum signed messages based o
 
 You can sign a transaction/message using your private key by calling [web3.personal.sign()](https://web3js.readthedocs.io/en/1.0/web3-eth-personal.html) using MetaMask, Toshi, or another compatible web3 runtime. All signatures are 65 bytes long with the format `{bytes32 r}{bytes32 s}{uint8 v}`. Multiple signatures are stored densely (no padding) by concatenating them.
 
+[API Reference](#api-reference) &middot; [Check out the tests for examples.](https://github.com/dsys/solidity-sigutils/blob/master/test/TestSignatureUtils.sol)
+
 ## Usage
 
-[API Reference](#api-reference)
+[![solidity-sigutils flow](https://raw.githubusercontent.com/dsys/solidity-sigutils/master/resources/diagram.png)](#working-with-ethereum-signed-messages)
+
+Signed messages are becoming an increasingly important part of decentralized applications, especially for identity management. Imagine a user wishes to perform a transaction (i.e. send a cryptokitty to a friend) on the Ethereum chain, but wants to require approval from two of their devices approve. One emerging solution is to use signed messages and a proxy contract. Here's how it goes:
+
+1. The user signs a transaction message with their private key from multiple devices.
+2. The user concatenates the message signatures into a single multi-signature.
+3. The user sends the transaction message and concatenated signatures to their proxy verifier contract, which verifies that enough valid signatures have been provided using this library.
+4. The proxy contract forwards the transaction to the designated contract.
+
+Because signed messages inherit the security of Ethereum's `ecrecover()`, a user does not need to trust intermediaries with their private key to perform actions on their behalf. This enables more complex deployment strategies, such as gas relays which pay for gas costs on a user's behalf.
+
+## Installation
 
 Install using npm:
 
@@ -40,21 +53,6 @@ contract MyContract {
 
 }
 ```
-
-[Check out the tests for more examples.](https://github.com/dsys/solidity-sigutils/blob/master/test/TestSignatureUtils.sol)
-
-## Working with Ethereum Signed Messages
-
-![solidity-sigutils flow](https://raw.githubusercontent.com/dsys/solidity-sigutils/master/resources/diagram.png)
-
-Signed messages are becoming an increasingly important part of decentralized applications, especially for identity management. Imagine a user wishes to perform a transaction (i.e. send a cryptokitty to a friend) on the Ethereum chain, but wants to require approval from two of their devices approve. One emerging solution is to use signed messages and a proxy contract. Here's how it goes:
-
-1. The user signs a transaction message with their private key from multiple devices.
-2. The user concatenates the message signatures into a single multi-signature.
-3. The user sends the transaction message and concatenated signatures to their proxy verifier contract, which verifies that enough valid signatures have been provided using this library.
-4. The proxy contract forwards the transaction to the designated contract.
-
-Because signed messages inherit the security of Ethereum's `ecrecover()`, a user does not need to trust intermediaries with their private key to perform actions on their behalf. This enables more complex deployment strategies, such as gas relays which pay for gas costs on a user's behalf.
 
 ## Development
 
