@@ -20,7 +20,7 @@ matrix:
       - rm -rf node_modules
 
 install:
-  - bash ./bin/ci-install.sh
+  - npm install
 
 script:
   - bash ./bin/test.sh

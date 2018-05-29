@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "eth-gas-reporter": "^0.1.2",
+    "ganache-cli": "^6.1.0",
     "solidity-docgen": "^0.1.0",
     "solium": "^1.1.7",
     "solmd": "^0.3.0",
