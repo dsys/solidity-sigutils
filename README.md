@@ -9,7 +9,7 @@ These utilities make it simple to interact with Ethereum signed messages based o
 
 You can sign a transaction/message using your private key by calling [web3.personal.sign()](https://web3js.readthedocs.io/en/1.0/web3-eth-personal.html) using MetaMask, Toshi, or another compatible web3 runtime. All signatures are 65 bytes long with the format `{bytes32 r}{bytes32 s}{uint8 v}`. Multiple signatures are stored densely (no padding) by concatenating them.
 
-[API Reference](#api-reference) &middot; [Check out the tests for examples.](https://github.com/dsys/solidity-sigutils/blob/master/test/TestSignatureUtils.sol)
+[API Reference](#api-reference) &middot; [Read the announcement.](https://medium.com/dsys/now-open-source-friendly-multi-signatures-for-ethereum-d75ca5a0dc5c) &middot; [See tests for examples.](https://github.com/dsys/solidity-sigutils/blob/master/test/TestSignatureUtils.sol)
 
 ## Usage
 
