@@ -11,7 +11,7 @@
     "test": "truffle test",
     "watch": "watchman-make -p 'contracts/**/*.sol' 'test/**/*.sol' --run 'yarn test'",
     "compile": "truffle compile",
-    "migrate": "truffle migrate --reset --compile-all",
+    "migrate": "truffle migrate --reset --compile-all --network development",
     "migrate-rinkeby": "truffle migrate --reset --compile-all --network rinkeby",
     "migrate-mainnet": "truffle migrate --compile-all --network mainnet",
     "lint": "solium -d contracts/",
