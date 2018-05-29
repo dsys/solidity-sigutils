@@ -18,9 +18,10 @@
     "fix": "solium --fix -d contracts/"
   },
   "devDependencies": {
-    "truffle": "^4.1.11",
     "eth-gas-reporter": "^0.1.2",
+    "solidity-docgen": "^0.1.0",
     "solium": "^1.1.7",
+    "truffle": "^4.1.11",
     "truffle-privatekey-provider": "^0.0.6"
   }
 }
