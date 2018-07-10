@@ -94,6 +94,8 @@ library SignatureUtils {
             v := and(mload(add(_signatures, add(65, offset))), 0xff)
         }
 
+        if (v < 27) v += 27;
+
         require(v == 27 || v == 28);
     }
 
